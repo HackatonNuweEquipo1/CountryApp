@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HackatonFundacionEsplai.Context;
 using HackatonFundacionEsplai.Entities;
+using HackatonFundacionEsplai.Entities.Dto;
 
 namespace HackatonFundacionEsplai.Controllers
 {
@@ -84,16 +85,19 @@ namespace HackatonFundacionEsplai.Controllers
         // POST: api/Regions
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Region>> PostRegion(Region region)
+        public async Task<ActionResult<Region>> PostRegion(RegionDto region)
         {
           if (_context.Regions == null)
           {
               return Problem("Entity set 'ApplicationDBContext.Regions'  is null.");
           }
-            _context.Regions.Add(region);
+            Region r = new Region();
+            r.Name = region.Name;
+            r.ID = region.ID;
+            _context.Regions.Add(r);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRegion", new { id = region.ID }, region);
+            return CreatedAtAction("GetRegion", new { id = r.ID }, r);
         }
 
         // DELETE: api/Regions/5
