@@ -1,0 +1,22 @@
+.footer {
+  width: 100%;
+  padding: 25px;
+  background-color: #c1c1c1;
+  position: fixed;
+  bottom: 0px;
+}
+
+.text {
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.col1 {
+  text-align: center;
+}
+
+.icon {
+  font-size: larger;
+  text-decoration: none;
+  color: red;
+}

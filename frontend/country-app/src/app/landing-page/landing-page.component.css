@@ -1,0 +1,13 @@
+.cont1 {
+  overflow-x: hidden;
+}
+
+.col1 {
+  margin-top: 25px;
+  margin-left: 45px;
+  margin-right: 45px;
+}
+
+.inner1 {
+  height: 60vh;
+}
