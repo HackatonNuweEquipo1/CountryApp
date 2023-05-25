@@ -11,6 +11,6 @@ namespace HackatonFundacionEsplai.Entities
         [Required]
         public string Name { get; set; }
 
-        public List<Country> Mensajes { get; set; } = new List<Country>();
+        public List<Country> Countries { get; set; } = new List<Country>();
     }
 }
