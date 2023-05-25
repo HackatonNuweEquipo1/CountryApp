@@ -12,6 +12,9 @@ namespace HackatonFundacionEsplai.Entities
         [StringLength(50)]
         [Required]
         public string Name { get; set; }
+        [StringLength(100)]
+        [Required]
+        public string Password { get; set; }
         [Precision(2)]
         public decimal Population { get; set; }
         [Precision(2)]
