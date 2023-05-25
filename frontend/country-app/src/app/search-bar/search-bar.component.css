@@ -1,0 +1,45 @@
+.d-flex {
+  background-image: url(../../assets/search-bar-background.jpg);
+  background-size: cover;
+  height: 250px;
+}
+
+.title-selects {
+  font-size: 20px;
+  margin: 0px 0px 5px 0px;
+  padding-left: 3px;
+  font-weight: 500;
+}
+
+.row {
+  background-color: white;
+  width: 90%;
+  height: fit-content;
+  padding: 30px;
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: #75b362;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #457536;
+}
+
+.modal-body {
+  padding: 0px;
+}
+
+.modal-content {
+  overflow:hidden;
+  border-radius: 8px;
+}
+
+.list-compare {
+  width: 100%;
+  padding: 0px, 15px, 0px, 15px;
+  border-radius: 0px;
+  border-bottom: 1px solid #d4d4d4;
+}
