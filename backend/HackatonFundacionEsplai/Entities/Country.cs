@@ -7,8 +7,6 @@ namespace HackatonFundacionEsplai.Entities
     public class Country
     {
         [Key]
-        [Required]
-        public int ID { get; set; }
         [StringLength(50)]
         [Required]
         public string Name { get; set; }

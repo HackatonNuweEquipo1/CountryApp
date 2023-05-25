@@ -21,6 +21,41 @@ namespace HackatonFundacionEsplai.Controllers
             _context = context;
         }
 
+        // GET: api/Usuarios/CheckCredentials/email_ejemplo@ejemplo.com,psswrd_ejemplo
+        [HttpGet("CheckCredentials/name_{name},psswrd_{psswrd}")]
+        public async Task<ActionResult<bool>> CheckCredentials(string name, string psswrd)
+        {
+            if (_context.Countries == null)
+            {
+                return NotFound();
+            }
+
+            if (CountryExists(name))
+            {
+                var country = _context.Countries.Find(name);
+
+                if (country.Password == psswrd)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
+        // GET: api/Usuarios/EmailExist/ejemplo@ejemplo.com
+        [HttpGet("NameExist/{id}")]
+        public async Task<ActionResult<bool>> CheckEmailRegistered(string id)
+        {
+            if (_context.Countries == null)
+            {
+                return NotFound();
+            }
+
+            return CountryExists(id);
+        }
+
+
         // GET: api/Countries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Country>>> GetCountries()
@@ -34,7 +69,7 @@ namespace HackatonFundacionEsplai.Controllers
 
         // GET: api/Countries/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Country>> GetCountry(int id)
+        public async Task<ActionResult<Country>> GetCountry(string id)
         {
           if (_context.Countries == null)
           {
@@ -53,9 +88,9 @@ namespace HackatonFundacionEsplai.Controllers
         // PUT: api/Countries/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCountry(int id, Country country)
+        public async Task<IActionResult> PutCountry(string id, Country country)
         {
-            if (id != country.ID)
+            if (id != country.Name)
             {
                 return BadRequest();
             }
@@ -91,14 +126,28 @@ namespace HackatonFundacionEsplai.Controllers
               return Problem("Entity set 'ApplicationDBContext.Countries'  is null.");
           }
             _context.Countries.Add(country);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (CountryExists(country.Name))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            return CreatedAtAction("GetCountry", new { id = country.ID }, country);
+            return CreatedAtAction("GetCountry", new { id = country.Name }, country);
         }
 
         // DELETE: api/Countries/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCountry(int id)
+        public async Task<IActionResult> DeleteCountry(string id)
         {
             if (_context.Countries == null)
             {
@@ -116,9 +165,9 @@ namespace HackatonFundacionEsplai.Controllers
             return NoContent();
         }
 
-        private bool CountryExists(int id)
+        private bool CountryExists(string id)
         {
-            return (_context.Countries?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.Countries?.Any(e => e.Name == id)).GetValueOrDefault();
         }
     }
 }
