@@ -7,6 +7,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     FooterComponent,
     AboutComponent,
     LandingPageComponent
+    ChartComponent
   ],
   imports: [
     BrowserModule,
